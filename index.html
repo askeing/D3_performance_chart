@@ -12,27 +12,27 @@
     <link rel="stylesheet" href="css/main.min.css">
 </head>
 <body>
-<div class="container">
-    <h1>Performance</h1>
-    <div>
-        <svg class="chart"></svg>
-    </div>
-    <div>
-        <form>
-            <div class="form-group">
-                <label for="inputJson">Input Performance JSON</label>
+    <div class="container">
+        <h1>Performance</h1>
+        <div>
+            <svg class="chart"></svg>
+        </div>
+        <div>
+            <form>
+                <div class="form-group">
+                    <label for="inputJson">Input Performance JSON</label>
                     <textarea id="inputJson" class="form-control" rows="10"
                               placeholder="Input Performance JSON here..."></textarea>
-            </div>
-        </form>
-        <span id="helpBlock" class="help-block alert alert-danger hidden"></span>
-        <button type="submit" id="btnPaint" class="btn btn-default">Paint</button>
+                </div>
+            </form>
+            <span id="helpBlock" class="help-block alert alert-danger hidden"></span>
+            <button type="submit" id="btnPaint" class="btn btn-default">Paint</button>
+        </div>
+        <h2>Other</h2>
+        <div>
+            <p class="text-muted">You can add following link to bookmark toolbar.</p>
+            <a class="btn btn-default" href="javascript:(function(){window.open(%22http://askeing.github.io/D3_performance_chart/?p=%22+JSON.stringify(window.performance.timing.toJSON()),%22perf_timing%22);})();">PerfTiming Chart</a>
+        </div>
     </div>
-    <h2>Other</h2>
-    <div>
-        <p class="text-muted">You can add following link to bookmark toolbar.</p>
-        <a class="btn btn-default" href="javascript:(function(){window.open(%22http://askeing.github.io/D3_performance_chart/?p=%22+JSON.stringify(window.performance.timing.toJSON()),%22perf_timing%22);})();">PerfTiming Chart</a>
-    </div>
-</div>
 </body>
 </html>
