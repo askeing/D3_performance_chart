@@ -1,0 +1,30 @@
+{
+  "name": "D3_Performance_Chart",
+  "version": "0.0.1",
+  "description": "Show D3 Timeline Chart from Performance Timing",
+  "author": "Askeing",
+  "license": "MIT",
+  "repository": "askeing/D3_performance_chart",
+  "main": "lib",
+  "homepage": "http://askeing.github.io/D3_performance_chart/",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "keywords": [
+    "performance",
+    "timing",
+    "d3js",
+    "timeline"
+  ],
+  "dependencies": {},
+  "scripts": {
+    "build": "grunt"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.1.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+  }
+}

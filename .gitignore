@@ -1,3 +1,11 @@
+css/main.min.css
+js/main.min.js
+js/performance_chart.min.js
+
+# project files
+.idea
+.DS_Store
+
 # Logs
 logs
 *.log

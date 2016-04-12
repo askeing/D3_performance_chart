@@ -1,0 +1,63 @@
+.chart rect.background {
+    fill: #ddd;
+}
+.chart rect.network_background {
+    fill: #fc9272;
+    z-index: 1;
+}
+.chart rect.request_background {
+    fill: #a1d99b;
+    z-index: 1;
+}
+.chart rect.dom_background {
+    fill: #9ecae1;
+    z-index: 1;
+}
+
+.chart line.network_data {
+    stroke: #de2d26;
+    stroke-width: 2px;
+    z-index: 2;
+}
+.chart rect.network_data {
+    fill: #de2d26;
+    z-index: 2;
+}
+.chart line.request_data {
+    stroke: #31a354;
+    stroke-width: 2px;
+    z-index: 2;
+}
+.chart rect.request_data {
+    fill: #31a354;
+    z-index: 2;
+}
+.chart line.dom_data {
+    stroke: #3182bd;
+    stroke-width: 1px;
+    z-index: 2;
+}
+.chart rect.dom_data {
+    fill: #3182bd;
+    z-index: 2;
+}
+
+.chart text {
+    fill: #666;
+    font: 10px sans-serif;
+    text-anchor: start;
+    z-index: 2;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 14px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: #fff7bc;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
