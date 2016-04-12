@@ -39,8 +39,6 @@ function getTimeIntervalArray(performance_json, has_redirect) {
     ret.push(performance_json["requestStart"] + " ms");
     // response
     ret.push(performance_json["responseStart"] + "~" + performance_json["responseEnd"] + " ms");
-    // unloadEvent
-    ret.push(performance_json["unloadEventStart"] + "~" + performance_json["unloadEventEnd"] + " ms");
     // domLoading
     ret.push(performance_json["domLoading"] + " ms");
     // domInteractive
@@ -72,8 +70,6 @@ function getTimeSliceArray(performance_json, has_redirect) {
     ret.push("0 ms");
     // response
     ret.push((performance_json["responseEnd"] - performance_json["responseStart"]) + " ms");
-    // unloadEvent
-    ret.push((performance_json["unloadEventEnd"] - performance_json["unloadEventStart"]) + " ms");
     // domLoading
     ret.push("0 ms");
     // domInteractive
@@ -106,11 +102,11 @@ function paint(performance_json) {
     // There are 13 columns when has redirect, and 12 columns when no redirect.
     var labels = ["navigationStart", "redirect", "fetchStart", "domainLookup", "connect",
         "requestStart", "response",
-        "unloadEvent", "domLoading", "domInteractive", "domContentLoaded", "domComplete", "loadEvent"];
+        "domLoading", "domInteractive", "domContentLoaded", "domComplete", "loadEvent"];
     if (!has_redirect) {
         labels = ["navigationStart", "fetchStart", "domainLookup", "connect",
             "requestStart", "response",
-            "unloadEvent", "domLoading", "domInteractive", "domContentLoaded", "domComplete", "loadEvent"];
+            "domLoading", "domInteractive", "domContentLoaded", "domComplete", "loadEvent"];
     }
 
     // Get the offset and range of each steps.
@@ -127,7 +123,7 @@ function paint(performance_json) {
     var _request_range = _connect_max - _connect_min;
     var _request_offset = _connect_min;
     // 3. DOM Steps
-    var _dom_array = [performance_json["domLoading"], performance_json["unloadEventStart"], performance_json["unloadEventEnd"], performance_json["domInteractive"], performance_json["domContentLoadedEventStart"], performance_json["domContentLoadedEventEnd"], performance_json["loadEventStart"], performance_json["loadEventEnd"], performance_json["domComplete"]];
+    var _dom_array = [performance_json["domLoading"], performance_json["domInteractive"], performance_json["domContentLoadedEventStart"], performance_json["domContentLoadedEventEnd"], performance_json["loadEventStart"], performance_json["loadEventEnd"], performance_json["domComplete"]];
     var _dom_min = Math.min.apply(Math, _dom_array);
     var _dom_max = Math.max.apply(Math, _dom_array);
     var _dom_range = _dom_max - _dom_min;
@@ -160,14 +156,14 @@ function paint(performance_json) {
             if (0<=i && i<2) return "n n" + (i+1);
             if (2<=i && i<5) return "n f f" + (i-1);
             if (5<=i && i<7) return "r r" + (i-4);
-            if (7<=i && i<13) return "d d" + (i-6);
+            if (7<=i && i<12) return "d d" + (i-6);
         });
     } else {
         bar.attr("class", function(d, i) {
             if (0<=i && i<1) return "n n" + (i+1);
             if (1<=i && i<4) return "n f f" + (i);
             if (4<=i && i<6) return "r r" + (i-3);
-            if (6<=i && i<12) return "d d" + (i-5);
+            if (6<=i && i<11) return "d d" + (i-5);
         });
     }
 
@@ -246,32 +242,25 @@ function paint(performance_json) {
     }
     
     // DOM data
-    // unloadEvent
-    _tmp_var = (performance_json["unloadEventEnd"] - performance_json["unloadEventStart"]);
-    if(x(_tmp_var) < 1) {
-        drawLine("g.d1", x(performance_json["unloadEventEnd"]), bar_height - 2, "dom_data", chart);
-    } else {
-        drawRect("g.d1", x(_tmp_var), x(performance_json["unloadEventStart"]), bar_height - 2, "dom_data", chart);
-    }
     // domLoading
-    drawLine("g.d2", x(performance_json["domLoading"]), bar_height - 2, "dom_data", chart);
+    drawLine("g.d1", x(performance_json["domLoading"]), bar_height - 2, "dom_data", chart);
     // domInteractive
-    drawLine("g.d3", x(performance_json["domInteractive"]), bar_height - 2, "dom_data", chart);
+    drawLine("g.d2", x(performance_json["domInteractive"]), bar_height - 2, "dom_data", chart);
     // domContentLoaded
     _tmp_var = (performance_json["domContentLoadedEventEnd"] - performance_json["domContentLoadedEventStart"]);
     if(x(_tmp_var) < 1) {
-        drawLine("g.d4", x(performance_json["domContentLoadedEventEnd"]), bar_height - 2, "dom_data", chart);
+        drawLine("g.d3", x(performance_json["domContentLoadedEventEnd"]), bar_height - 2, "dom_data", chart);
     } else {
-        drawRect("g.d4", x(_tmp_var), x(performance_json["domContentLoadedEventStart"]), bar_height - 2, "dom_data", chart);
+        drawRect("g.d3", x(_tmp_var), x(performance_json["domContentLoadedEventStart"]), bar_height - 2, "dom_data", chart);
     }
     // domComplete
-    drawLine("g.d5", x(performance_json["domComplete"]), bar_height - 2, "dom_data", chart);
+    drawLine("g.d4", x(performance_json["domComplete"]), bar_height - 2, "dom_data", chart);
     // loadEvent
     _tmp_var = (performance_json["loadEventEnd"] - performance_json["loadEventStart"]);
     if(x(_tmp_var) < 1) {
-        drawLine("g.d6", x(performance_json["loadEventEnd"]), bar_height - 2, "dom_data", chart);
+        drawLine("g.d5", x(performance_json["loadEventEnd"]), bar_height - 2, "dom_data", chart);
     } else {
-        drawRect("g.d6", x(_tmp_var), x(performance_json["loadEventStart"]), bar_height - 2, "dom_data", chart);
+        drawRect("g.d5", x(_tmp_var), x(performance_json["loadEventStart"]), bar_height - 2, "dom_data", chart);
     }
 
     // Draw the time interval information
