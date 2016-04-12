@@ -22,7 +22,10 @@ $(document).ready(function() {
 
     var p = getParameter("p");
     if (p) {
-        performance_json = JSON.parse(decodeURI(p));
+        var p_json = decodeURI(p);
+        performance_json = JSON.parse(p_json);
+        $('textarea#inputJson').val(decodeURI(p));
+        window.history.pushState("Performance Timing", "Performance", window.location.origin + window.location.pathname);
         paint(performance_json);
     } else {
         $.getJSON("data.json", function (data) {
