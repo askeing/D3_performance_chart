@@ -22,11 +22,38 @@ module.exports = function (grunt) {
                     'dest/css/main.min.css': ['src/css/main.css']
                 }
             }
-        }
+        },
+        'copy': {
+            d3: {
+                expand: true,
+                cwd: 'd3',
+                src: '**',
+                dest: 'dest/d3'
+            },
+            js: {
+                expand: true,
+                cwd: 'js',
+                src: '**',
+                dest: 'dest/js'
+            },
+            fonts: {
+                expand: true,
+                cwd: 'css',
+                src: '**',
+                dest: 'dest/css'
+            },
+            root: {
+                expand: true,
+                cwd: '.',
+                src: ['index.html', 'data.json'],
+                dest: 'dest/'
+            },
+        },
     });
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['clean', 'uglify', 'cssmin']);
+    grunt.registerTask('default', ['clean', 'uglify', 'cssmin', 'copy']);
 };
